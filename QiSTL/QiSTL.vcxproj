@@ -142,6 +142,9 @@
   <ItemGroup>
     <ClCompile Include="main\test.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Head\Alloc.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

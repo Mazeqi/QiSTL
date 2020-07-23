@@ -4,7 +4,9 @@ using namespace std;
 
 
 int main() {
-	printf("1111");
+	size_t a = 8;
+	size_t b = 8 - 1;
+	cout <<( a & ~b);
 
 	return 0;
 }

@@ -2,7 +2,7 @@
 #ifndef  _ALLOC_H_
 #define  _ALLOC_H_
 #include<cstdio>
-
+#include<cstdlib>
 /*
 	@author : MZQ
 	@version: 1.0
@@ -41,10 +41,11 @@ namespace QTL {
 		};
 
 	private:
-		//16个free-lists
+		//16个free-lists,存放的是指向各处的指针
 		static obj* volatile free_list[NFFREELISTS];
 
-		//根据区块大小，决定使用第n号free-list。n从0开始
+		//根据区块大小，决定使用第n号free-list
+		//n从0开始， 申请空间最大是128 超过128启动一级配置，二级配置最大 128/8 = 16
 		static size_t FREELIST_INDEX(size_t bytes) {
 			return ((bytes)+ALIGN - 1) / ALIGN - 1;
 		}

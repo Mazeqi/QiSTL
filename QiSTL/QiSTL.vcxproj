@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main\test.cpp" />
+    <ClCompile Include="model\Alloc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\Alloc.h" />

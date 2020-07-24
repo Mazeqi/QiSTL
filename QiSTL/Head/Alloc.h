@@ -23,6 +23,8 @@ namespace QTL {
 		//free-list的个数
 		enum{NFFREELISTS = MAX_BYTES / ALIGN};
 
+		enum{NOBJS = 20};
+
 
 	private:
 
@@ -56,7 +58,7 @@ namespace QTL {
 
 		//配置一大块空间，可容纳nobjs个大小为"size"的区块
 		//如果配置nobjs个区块有所不便，nobjs可能会降低
-		static char* chunk_alloc(size_t size, int& nobjs);
+		static char* chunk_alloc(size_t size, size_t& nobjs);
 
 		//内存池起始位置，只在chunk_alloc中变换
 		static char* start_free;

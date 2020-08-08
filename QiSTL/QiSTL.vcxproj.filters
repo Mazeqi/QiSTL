@@ -15,15 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main\test.cpp">
+    <ClCompile Include="model\Alloc.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="model\Alloc.cpp">
+    <ClCompile Include="main\AllocTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\Alloc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\Allocator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\Iterator.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

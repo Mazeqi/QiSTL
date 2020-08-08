@@ -6,7 +6,7 @@ namespace QTL {
 	size_t alloc::heap_size = 0;
 
 	alloc::obj* volatile alloc::free_list[alloc::NFFREELISTS] = {
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,
 	};
 
 
@@ -26,7 +26,7 @@ namespace QTL {
 		my_free_list = free_list + FREELIST_INDEX(bytes);
 		result = *my_free_list;
 
-		if (my_free_list) {
+		if (result) {
 			*my_free_list = result->next;
 			return result;
 		}

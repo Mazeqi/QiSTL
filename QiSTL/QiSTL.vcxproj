@@ -140,11 +140,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main\test.cpp" />
+    <ClCompile Include="main\AllocTest.cpp" />
     <ClCompile Include="model\Alloc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\Alloc.h" />
+    <ClInclude Include="Head\Allocator.h" />
+    <ClInclude Include="Head\Iterator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,8 +12,9 @@
 
 namespace QTL {
 
-	//五种迭代器类型
 	//*---------------------------------------------------------------------------------------
+	//五种迭代器类型
+
 
 	//只读
 	struct input_iterator_tag{};
@@ -29,11 +30,11 @@ namespace QTL {
 
 	//涵盖算术能力 如p+n, p-n, p[n], p1 - p2, p1 < p2
 	struct random_access_iterator_tag:public bidirectional_iterator_tag{};
-	//*-----------------------------------------------------------------------------------------
 
 
 
 	//这个类用来被继承，是一个模板
+	//ptrdiff_t类型变量通常用来保存两个指针减法操作的结果
 	template <class Category, class T, class Distance = ptrdiff_t,
 	class Pointer = T*, class Reference = T&>
 		struct iterator {
@@ -122,12 +123,14 @@ namespace QTL {
 	}
 
 
-	//distance---------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------
+	//distance
+
 	//重载模板，最后一个参数能够确定重载的类型,从而选择某个函数
 	template<class InputIterator>
 	typename iterator_traits<InputIterator>::difference_type
 		_distance(InputIterator first, InputIterator last, input_iterator_tag) {
-		iterator_traits<InputIterator>::difference_type n = 0;
+		typename iterator_traits<InputIterator>::difference_type n = 0;
 		while (first != last) {
 			++first;
 			++n;
@@ -149,11 +152,12 @@ namespace QTL {
 		return _distance(first, last, iterator_category(first));
 	}
 
-	//-------------------------------------------------------------------------------------------------------
 
 
 
-	//advance------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	//advance
+
 	template<class InputIterator, class Distance>
 	inline void _advance(InputIterator& i, Distance n, input_iterator_tag) {
 		while (n--) {
@@ -189,6 +193,151 @@ namespace QTL {
 		_advance(i, n, iterator_category(i));
 	}
 
-	//--------------------------------------------------------------------------------------------------
+
+	//----------------------------------------------------------------------------------
+	//reverse_iterator
+	
+	template <class Iterator>
+	//反向迭代
+	class reverse_iterator {
+
+	private:
+
+		//记录对应的正向迭代器
+		Iterator current;
+
+	public:
+		//反向迭代器的五种类型
+		typedef typename iterator_traits<Iterator>::iterator_category  iterator_category;
+		typedef typename iterator_traits<Iterator>::value_type		   value_type;
+		typedef typename iterator_traits<Iterator>::difference_type	   difference_type;
+		typedef typename iterator_traits<Iterator>::pointer			   pointer;
+		typedef typename iterator_traits<Iterator>::reference		   reference;
+
+		typedef Iterator											   iterator_type;
+		typedef reverse_iterator<Iterator>							   self;
+
+	public:
+		//构造函数
+		reverse_iterator() {};
+		explicit reverse_iterator(iterator_type i) :current(i) {}
+		reverse_iterator(const self& rhs):current(rhs.current){}
+
+
+	public:
+		//取出对应的正向迭代器
+		iterator_type base()const {
+			return current;
+		}
+
+		// 实际对应正向迭代器的前一个位置
+		reference operator*() const {
+			Iterator tmp = current;
+			return *--tmp;
+		}
+
+		pointer operator->()const {
+			return &(operator*());
+		}
+
+		//反向后，前进变成后退
+		self& operator++() {
+			--current;
+			return *this;
+		}
+
+		self operator++(int) {
+			self tmp = *this;
+			--current;
+			return tmp;
+		}
+
+		self& operator--() {
+			++current;
+			return *this;
+		}
+
+		self operator--(int) {
+			self tmp = *this;
+			++current;
+			return tmp;
+		}
+
+		self& operator+=(difference_type n)
+		{
+			current -= n;
+			return *this;
+		}
+
+		self operator+(difference_type n) const
+		{
+			return self(current - n);
+		}
+
+		self& operator-=(difference_type n)
+		{
+			current += n;
+			return *this;
+		}
+
+		self operator-(difference_type n) const
+		{
+			return self(current + n);
+		}
+
+		reference operator[](difference_type n) const
+		{
+			return *(*this + n);
+		}
+
+	};
+
+
+	//----------------------------------------------------------------------------------------------------------
+	//重载比较操作符
+	template<class Iterator>
+	bool operator==(const reverse_iterator<Iterator>& x,
+		const reverse_iterator<Iterator>& y) {
+		return x.base() == y.base();
+	}
+
+	//x<y
+	template<class Iterator>
+	bool operator<(const reverse_iterator<Iterator>& x,
+		const reverse_iterator<Iterator>& y) {
+		return x.base() < y.base();
+	}
+
+	//x!=y
+	template<class Iterator>
+	bool operator!=(const reverse_iterator<Iterator>& x,
+		const reverse_iterator<Iterator>& y) {
+		return !(x == y);
+	}
+
+	//x>y
+	template <class Iterator>
+	bool operator>(const reverse_iterator<Iterator>& x,
+		const reverse_iterator<Iterator>& y)
+	{
+		return y < x;
+	}
+
+	//x<=y
+	template <class Iterator>
+	bool operator<=(const reverse_iterator<Iterator>& x,
+		const reverse_iterator<Iterator>& y)
+	{
+		return !(y < x);
+	}
+
+	//x>=y
+	template <class Iterator>
+	bool operator>=(const reverse_iterator<Iterator>& x,
+		const reverse_iterator<Iterator>& y)
+	{
+		return !(x < y);
+	}
+
 }
 #endif // !_ITERATOR_H_

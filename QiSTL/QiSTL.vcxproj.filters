@@ -18,7 +18,13 @@
     <ClCompile Include="model\Alloc.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="main\AllocTest.cpp">
+    <ClCompile Include="Test\AlgobaseTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\AlgobaseTestM.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\AllocTestM.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -30,6 +36,21 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Head\Iterator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\Uninitialized.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\Type_traits.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\Algobase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\Util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\AlgobaseTest.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

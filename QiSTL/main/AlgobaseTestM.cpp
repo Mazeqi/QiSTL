@@ -1,11 +1,8 @@
 #include"../Test/AlgobaseTest.h"
-#include"../Head/Algobase.h"
 #include<iostream>
 
 using namespace std;
 using namespace QTL;
-
-
 
 bool comparemax(int a, int b) {
 	if (a + 2 > b - 2) {
@@ -27,7 +24,7 @@ bool compare(int a, int b) {
 	return true;
 }
 
-void test1() {
+void test_min_max() {
 	QTL::AlgobaseTest::testMinMax();
 
 
@@ -43,9 +40,8 @@ void test1() {
 }
 
 
-//int main() {
-//	
-//	test1();
-//
-//	return 0;
-//}
+int main() {
+	
+	QTL::AlgobaseTest::test_copy_backward();
+	return 0;
+}

@@ -8,6 +8,8 @@
 namespace QTL {
 	namespace AlgobaseTest {
 		void testMinMax();
+		void test_copy();
+		void test_copy_backward();
 	}
 }
 

@@ -4,7 +4,8 @@
 
 #include"Iterator.h"
 #include"Type_traits.h"
-
+#include<string.h>
+#include<iostream>
 /*
 	@author: MZQ
 	@version:1.0
@@ -131,44 +132,8 @@ namespace QTL {
 		return result + (last - first);
 	}
 
-	template <class InputIter, class OutputIter>
-	inline OutputIter _copy_aux2(InputIter first, InputIter last,
-		OutputIter result, false_type) {
-		return _copy(first, last, result, iterator_category(first));
-	}
-
-	template <class InputIter, class OutputIter>
-	inline OutputIter _copy_aux2(InputIter first, InputIter last,
-		OutputIter result, true_type) {
-		return _copy(first, last, result, iterator_category(first));
-	}
-
-	template <class Tp>
-	inline Tp* _copy_aux2(Tp *first, Tp *last,
-		Tp* result, true_type) {
-		return _copy_trivial(first, last, result);
-	}
-
-	template <class Tp>
-	inline Tp* _copy_aux2(const Tp* first, const Tp* last,
-		Tp* result, true_type) {
-		return _copy_trivial(first, last, result);
-	}
-
-	template<class InputIter, class OutputIter, class Tp>
-	inline OutputIter _copy_aux(InputIter first, InputIter last,
-		OutputIter result, Tp*) {
-		typedef typename type_traits<Tp>::has_trivial_assignment_operator Trivial;
-		return _copy_aux2(first, last, result, Trivial());
-	}
-
-
-	template<class InputIter, class OutputIter>
-	inline OutputIter copy(InputIter first, InputIter last,
-		OutputIter result) {
-		return _copy_aux(first, last, result, value_type(first));
-	}
-
+	
+	
 	template <class InputIter, class OutputIter, class BoolType>
 	struct _copy_dispatch {
 		static OutputIter copy(InputIter first, InputIter last,
@@ -178,6 +143,9 @@ namespace QTL {
 		}
 	};
 
+	/*
+		是指针则跳过全部，直接调用copy_trivial
+	*/
 	template<class Tp>
 	struct _copy_dispatch<Tp*, Tp*, true_type> {
 		static Tp* copy(const Tp* first, const Tp* last, Tp* result) {
@@ -193,6 +161,7 @@ namespace QTL {
 	};
 
 
+	//唯一对外接口
 	template <class InputIter, class OutputIter>
 	inline OutputIter copy(InputIter first, InputIter last,
 		OutputIter result) {
@@ -205,11 +174,80 @@ namespace QTL {
 	}
 
 
-	template <class InputIter, class OutputIter>
-	inline OutputIter copy(InputIter first, InputIter last,
-		OutputIter result) {
-		return _copy(first, last, result, value_type(first));
+	//-----------------------------------------------------------------------------
+	//copy_backward
+	// 将 [first, last)区间内的元素拷贝到 [result - (last - first), result)内
+
+	//bidirectional_iterator_tag版本
+	template<class BidirectionalIter1, class BidirectionalIter2>
+	BidirectionalIter2 _copy_backward(BidirectionalIter1 first, BidirectionalIter1 last,
+		BidirectionalIter2 result, bidirectional_iterator_tag) {
+		while (first != last) {
+			*--result = *--last;
+		}
+		return result;
 	}
+
+	//random_access_iterator_tag
+	template<class BidirectionalIter1, class BidirectionalIter2>
+	BidirectionalIter2 _copy_backward(BidirectionalIter1 first, BidirectionalIter1 last,
+		BidirectionalIter2 result, random_access_iterator_tag) {
+		//std::cout << "random\n";
+		for (auto n = last - first; n > 0; --n) {
+			*--result = *--last;
+		}
+		return result;
+	}
+	
+
+	template<class BidirectionalIter1, class BidirectionalIter2, class BoolType>
+	struct _copy_backward_dispatch {
+		static BidirectionalIter2 copy(BidirectionalIter1 first, BidirectionalIter1 last,
+			BidirectionalIter2 result) {
+			//typedef typename iterator_traits<InputIter>::iterator_category Category;
+			return _copy_backward(first, last, result, iterator_category(first));
+		}
+	};
+
+
+	template <class Tp>
+	struct _copy_backward_dispatch<Tp*, Tp*, true_type>
+	{
+		static Tp* copy(const Tp* first, const Tp* last, Tp* result) {
+			//std::cout << "memmove\n";
+			const ptrdiff_t Num = last - first;
+			memmove(result - Num, first, sizeof(Tp) * Num);
+			return result - Num;
+		}
+	};
+	
+	
+	template <class Tp>
+	struct _copy_backward_dispatch<const Tp*, Tp*, true_type>
+	{
+		static Tp* copy(const Tp* first, const  Tp* last, Tp* result) {
+			return  _copy_backward_dispatch<Tp*, Tp*, true_type>
+				::copy(first, last, result);
+		}
+	};
+
+	//唯一对外接口
+	template <class BidirectionalIter1, class BidirectionalIter2>
+	inline BidirectionalIter2 copy_backward(BidirectionalIter1 first, BidirectionalIter1 last,
+		BidirectionalIter2 result) {
+
+		typedef typename iterator_traits<BidirectionalIter1>::value_type Tp;
+		typedef typename type_traits<Tp>::has_trivial_assignment_operator Trivial;
+
+		return _copy_backward_dispatch<BidirectionalIter1, BidirectionalIter2, Trivial>
+			::copy(first, last, result);
+	}
+
+
+	//-------------------------------------------------------------------------------------
+	//move
+
+
 
 }
 

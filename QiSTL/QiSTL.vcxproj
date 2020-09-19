@@ -149,6 +149,7 @@
     <ClInclude Include="Head\Algobase.h" />
     <ClInclude Include="Head\Alloc.h" />
     <ClInclude Include="Head\Allocator.h" />
+    <ClInclude Include="Head\Construct.h" />
     <ClInclude Include="Head\Iterator.h" />
     <ClInclude Include="Head\Type_traits.h" />
     <ClInclude Include="Head\Uninitialized.h" />

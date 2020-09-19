@@ -5,7 +5,7 @@
 	@author: MZQ
 	@version:1.0
 */
-
+#include<type_traits>
 
 namespace QTL {
 
@@ -47,6 +47,8 @@ namespace QTL {
 		/*
 			以下条件应该被遵守，因为编译器有可能自动为各型别产生专属的type_triats
 			特化版本
+
+			POD:https://stackoverflow.com/questions/146452/what-are-pod-types-in-c
 		*/
 		typedef false_type    has_trivial_default_constructor;
 		typedef false_type    has_trivial_copy_constructor;

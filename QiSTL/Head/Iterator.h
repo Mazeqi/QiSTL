@@ -40,7 +40,9 @@ namespace QTL {
 		struct iterator {
 		/*
 			value type 是指迭代器所指对象的类型，任何一个打算与STL算法有完美搭配的class
-			都应该定义自己的value type内嵌类型
+			都应该定义自己的value type内嵌类型。
+
+			返回自己的类型，可以用于声明变量
 		*/
 		typedef T			  value_type;
 

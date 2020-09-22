@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="model\Alloc.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Test\AlgobaseTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -25,6 +22,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main\AllocTestM.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Alloc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\DBM.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Allocator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

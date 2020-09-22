@@ -31,6 +31,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -51,6 +52,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -131,18 +133,23 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(MVCAM_COMMON_RUNENV)\Includes;$(MELSEC)\INCLUDE;$(OPENCV342)\include\opencv2;$(OPENCV342)\include\opencv;$(OPENCV342)\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(MVCAM_COMMON_RUNENV)\Libraries\win64;$(MELSEC)\Lib\x64;$(OPENCV342)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>MvCameraControl.lib;MdFunc32.lib;opencv_world342.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main\AlgobaseTestM.cpp" />
     <ClCompile Include="main\AllocTestM.cpp" />
-    <ClCompile Include="model\Alloc.cpp" />
+    <ClCompile Include="main\DBM.cpp" />
+    <ClCompile Include="Source\Alloc.cpp" />
+    <ClCompile Include="Source\Allocator.cpp" />
     <ClCompile Include="Test\AlgobaseTest.cpp" />
   </ItemGroup>
   <ItemGroup>

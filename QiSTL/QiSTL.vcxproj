@@ -157,10 +157,12 @@
     <ClInclude Include="Head\Alloc.h" />
     <ClInclude Include="Head\Allocator.h" />
     <ClInclude Include="Head\Construct.h" />
+    <ClInclude Include="Head\Exceptdef.h" />
     <ClInclude Include="Head\Iterator.h" />
     <ClInclude Include="Head\Type_traits.h" />
     <ClInclude Include="Head\Uninitialized.h" />
     <ClInclude Include="Head\Util.h" />
+    <ClInclude Include="Head\vector.h" />
     <ClInclude Include="Test\AlgobaseTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -42,11 +42,5 @@ namespace QTL {
 
 	};
 
-
-
-
-
-
-
 }
 #endif // !_ALLOCATOR__H_

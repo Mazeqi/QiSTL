@@ -41,4 +41,39 @@ namespace QTL {
 		//QTL::deallocate(static_cast<void *>(ptr),n * sizeof(T));
 		::operator delete(ptr);
 	}
+	
+	template<class T>
+	void allocator<T>::construct(T* ptr){
+		QTL::construct(ptr);
+	}
+
+	template<class T>
+	void allocator<T>::construct(T* ptr, const T& value){
+		QTL::construct(ptr, value);
+	}
+
+	template<class T>
+	void allocator<T>::construct(T* ptr, T&& value){
+		QTL::construct(ptr, QTL::move(value));
+	}
+
+	template<class T>
+	template<class ...Args>
+	inline void allocator<T>::construct(T* ptr, Args && ...args) {
+		QTL::construct(ptr, QTL::forward(args)...);
+	}
+
+	template <class T>
+	void allocator<T>::destroy(T* ptr)
+	{
+		QTL::destroy(ptr);
+	}
+
+	template <class T>
+	void allocator<T>::destroy(T* first, T* last)
+	{
+		QTL::destroy(first, last);
+	}
+
+
 }

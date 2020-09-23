@@ -62,5 +62,11 @@
     <ClInclude Include="Head\Construct.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Head\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\Exceptdef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

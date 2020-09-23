@@ -4,6 +4,7 @@
 #include<new.h>
 #include "Type_traits.h"
 #include"Iterator.h"
+#include "Util.h"
 
 /*
 	Author : MZQ
@@ -69,6 +70,11 @@ namespace QTL {
 	template <class T1>
 	inline void construct(T1* p) {
 		_Construct(p);
+	}
+
+	template<class Ty, class ... Args>
+	inline void construct(Ty* ptr, Args&&...args) {
+		new ((void*)ptr) Ty(QTL::forward<Args>(args)...);
 	}
 
 	template <class Tp>

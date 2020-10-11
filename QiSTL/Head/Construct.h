@@ -16,7 +16,7 @@ namespace QTL {
 	/*
 		这里传入的p是指向某块内存的指针，已经分配好的，
 		这样写的目的是在已经分配好的内存，即p指向的内存上
-		分配一个新的对象，这里为T1类的对象
+		分配一个新的对象，这里为T1类的对象,并且把value的值赋给T1
 	*/
 	template <class T1, class T2>
 	inline void _Construct(T1* p, const T2& value) {

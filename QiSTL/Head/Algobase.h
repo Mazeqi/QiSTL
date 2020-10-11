@@ -6,6 +6,7 @@
 #include"Type_traits.h"
 #include<string.h>
 #include<iostream>
+#include"Util.h"
 /*
 	@author: MZQ
 	@version:1.0
@@ -244,9 +245,95 @@ namespace QTL {
 	}
 
 
-	//-------------------------------------------------------------------------------------
-	//move
+	//-----------------------------------------------------------------------------------------
+	/*
+		copy_n
+		把 [first, first + n)区间上的元素拷贝到 [result, result + n)上
+		返回一个 pair 分别指向拷贝结束的尾部
+	*/
+	template <class InputIter, class Size, class OutputIter>
+	inline pair<InputIter, OutputIter> _copy_n(InputIter first, Size count, OutputIter result, input_iterator_tag) {
+		for (; count > 0; --count) {
+			*result = *first;
+			++first;
+			++result;
+		}
 
+		return pair<InputIter, OutputIter>(first, result);
+	}
+
+	template <class RandomIter, class Size, class OutputIter>
+	inline pair<RandomIter, OutputIter> 
+		_copy_n(RandomIter first, Size count, OutputIter result, random_access_iterator_tag) {
+		
+		RandomIter last = first + count;
+		return pair<RandomIter, OutputIter>(last, copy(first, last, result));
+
+	}
+
+	template<class InputIter, class Size, class OutputIter>
+	inline QTL::pair<InputIter, OutputIter>
+		copy_n(InputIter first, Size count, OutputIter result) {
+		return _copy_n(first, count, result, iterator_category(first));
+	}
+
+
+	//----------------------------------------------------------------------------------------------
+	/*
+		fill_n
+		从 first 位置开始填充 n 个值, 并返回first
+	*/
+
+	template <class OutputIter, class Size, class Tp>
+	OutputIter _fill_n(OutputIter first, Size n, const Tp& value, false_type) {
+		for (; n > 0; n--, ++first) {
+			*first = value;
+		}
+		return first;
+	}
+
+	// 为 one - byte 类型提供特化版本
+	template <class Tp, class Size, class Up>
+	typename std::enable_if<
+		std::is_integral<Tp>::value && sizeof(Tp) == 1 &&
+		!std::is_same<Tp, bool>::value &&
+		std::is_integral<Up>::value && sizeof(Up) == 1,
+		Tp*>::type
+		_fill_n(Tp* first, Size n, Up value)
+	{
+		if (n > 0)
+		{
+			std::memset(first, (unsigned char)value, (size_t)(n));
+		}
+		return first + n;
+	}
+
+	template <class OutputIter, class Size, class T>
+	OutputIter fill_n(OutputIter first, Size n, const T& value)
+	{
+		return _fill_n(first, n, value);
+	}
+
+	//--------------------------------------------------------------------------------------------------
+	/*
+		fill
+		为 [first, last)区间内的所有元素填充新值
+	*/
+	template <class ForwardIter, class T>
+	void _fill(ForwardIter first, ForwardIter last, const T& value, forward_iterator_tag) {
+		for (; first != last; ++first) {
+			*first = value;
+		}
+	}
+
+	template <class ForwardIter, class T>
+	void _fill(ForwardIter first, ForwardIter last, const T& value, random_access_iterator_tag) {
+		
+	}
+
+
+	
+	
 
 
 }

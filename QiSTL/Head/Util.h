@@ -3,7 +3,7 @@
 #define _UTIL_H_
 
 #include <cstddef>
-#include "Type_traits.h"
+//#include "Type_traits.h"
 
 namespace QTL {
 	
@@ -71,11 +71,6 @@ namespace QTL {
 		pair(const T1& a, const T2& b) : first(a), second(b) {}
 
 	};
-
-
-	
-
-
 
 }
 

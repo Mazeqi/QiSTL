@@ -33,6 +33,12 @@
     <ClCompile Include="Source\Allocator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="main\demo_begin_threadx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main\test_begin_threaddx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\Alloc.h">

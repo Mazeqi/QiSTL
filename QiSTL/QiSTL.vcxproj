@@ -148,6 +148,8 @@
     <ClCompile Include="main\AlgobaseTestM.cpp" />
     <ClCompile Include="main\AllocTestM.cpp" />
     <ClCompile Include="main\DBM.cpp" />
+    <ClCompile Include="main\demo_begin_threadx.cpp" />
+    <ClCompile Include="main\test_begin_threaddx.cpp" />
     <ClCompile Include="Source\Alloc.cpp" />
     <ClCompile Include="Source\Allocator.cpp" />
     <ClCompile Include="Test\AlgobaseTest.cpp" />

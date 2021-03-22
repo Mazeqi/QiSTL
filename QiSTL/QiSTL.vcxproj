@@ -134,6 +134,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(MVCAM_COMMON_RUNENV)\Includes;$(MELSEC)\INCLUDE;$(OPENCV342)\include\opencv2;$(OPENCV342)\include\opencv;$(OPENCV342)\include;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,8 +149,10 @@
     <ClCompile Include="main\AlgobaseTestM.cpp" />
     <ClCompile Include="main\AllocTestM.cpp" />
     <ClCompile Include="main\DBM.cpp" />
-    <ClCompile Include="main\demo_begin_threadx.cpp" />
-    <ClCompile Include="main\test_begin_threaddx.cpp" />
+    <ClCompile Include="Modern_Cpp\chapter3\move_test.cpp" />
+    <ClCompile Include="Modern_Cpp\exercise\excercise2.cpp" />
+    <ClCompile Include="Thread\demo_begin_threadx.cpp" />
+    <ClCompile Include="Thread\test_begin_threaddx.cpp" />
     <ClCompile Include="Source\Alloc.cpp" />
     <ClCompile Include="Source\Allocator.cpp" />
     <ClCompile Include="Test\AlgobaseTest.cpp" />

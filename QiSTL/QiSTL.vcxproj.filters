@@ -33,10 +33,16 @@
     <ClCompile Include="Source\Allocator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="main\demo_begin_threadx.cpp">
+    <ClCompile Include="Thread\test_begin_threaddx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="main\test_begin_threaddx.cpp">
+    <ClCompile Include="Thread\demo_begin_threadx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Modern_Cpp\exercise\excercise2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Modern_Cpp\chapter3\move_test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
